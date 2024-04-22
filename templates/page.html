@@ -1,0 +1,29 @@
+<form method="POST">
+    <div>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ date1 }}">
+    </div>
+    
+    <div>
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ date2 }}">
+    </div>
+    
+    
+    <div>
+        <label for="keywords">Search Keyword:</label>
+        <input type="text" id="keywords" name="keywords" value="{{ string1 }}">
+    </div>
+    
+    <div>
+        <label for="dropdown">Country:</label>
+        <select id="dropdown" name="dropdown">
+            {% for option_value, option_text in dropdown_options %}
+                <option value="{{ option_value }}" {% if option_value == dropdown %}selected{% endif %}>{{ option_text }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Search"> 
+    </div>
+</form>

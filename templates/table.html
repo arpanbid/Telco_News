@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Resullts</title>
+    <style type="text/css">
+        table.data {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Search Resullts: {{count}} news</h2>
+
+{% for table in tables %}
+    {{ table|safe }}
+{% endfor %}
+
+</body>
+</html>
