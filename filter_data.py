@@ -25,7 +25,14 @@ def read_data(start_date, end_date, input_string, country):
 
     #replace \u0027 as '
     df['title'] = df['title'].str.replace(r"\\u0027", "'")
+    df['title'] = df['title'].str.replace(r'\\u002B', " ")
+    df['title'] = df['title'].str.replace(r'\\u0026', " ")
     df['abstract'] = df['abstract'].str.replace(r'\\u0027', "'")
+    df['abstract'] = df['abstract'].str.replace(r'\\u00A0', " ")
+    df['abstract'] = df['abstract'].str.replace(r'\\u0022', " ")
+    df['abstract'] = df['abstract'].str.replace(r'\\u002B', " ")
+    df['abstract'] = df['abstract'].str.replace(r'\\u0026', " ")
+    
 
 
     # filter country
