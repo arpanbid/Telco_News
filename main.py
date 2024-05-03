@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 from datetime import datetime
 import filter_data
+
+
 
 country_list = filter_data.country_lists()
 country_list.sort()
@@ -9,6 +11,7 @@ dropdown_options = []
 
 for country in country_list:
     dropdown_options.append((country, country))
+
 
 
 
@@ -26,7 +29,9 @@ def form():
         end_date = request.form.get('end_date')
         
         filtered_df = filter_data.read_data(str(start_date), str(end_date), (keywords), (dropdown))
+        filtered_df = filtered_df.iloc[:50, :] 
         
+        filtered_df.to_excel("filtered_news.xlsx", index=False)
       
         return render_template('table.html', count = len(filtered_df), tables=[filtered_df.to_html(classes='data')], titles=filtered_df.columns.values)
         
@@ -47,6 +52,12 @@ def update_news():
         import update_TP
         count = update_TP.news_added
     return render_template('update_success.html', count=str(count))
+
+@app.route('/download', methods=['GET'])
+def download():
+    return send_file('filtered_news.xlsx', as_attachment=True)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
