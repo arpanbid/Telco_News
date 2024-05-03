@@ -21,6 +21,12 @@
 
 <h2>Search Resullts: {{count}} news</h2>
 
+<div>
+        <form action="/download" method="get">
+            <button type="submit">Download as Excel</button>
+        </form>
+</div>
+
 {% for table in tables %}
     {{ table|safe }}
 {% endfor %}
