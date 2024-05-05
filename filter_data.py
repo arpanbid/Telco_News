@@ -78,7 +78,7 @@ def read_data(start_date, end_date, input_string, country):
 
     filtered_date_df = filtered_date_df.rename(columns=new_column_names)
     
-    new_sequence = ['date', 'Title', 'Abstract', 'Country']
+    new_sequence = ['date', 'Title', 'Abstract', 'Country', 'Link']
     filtered_date_df = filtered_date_df[new_sequence]
     
     return (filtered_date_df)
