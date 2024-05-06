@@ -116,7 +116,7 @@ if b.days>1:
         print("Error: Too many news.")
     else:
         df = pd.concat([df, new_df], ignore_index=True)
-        df.to_csv("News.csv")
+        df.to_csv("News.csv", index=False)
         new_count = len(df)
         news_added = new_count - count
         print("Updated\n\nTotal news available in the CSV file: " + str(new_count))
