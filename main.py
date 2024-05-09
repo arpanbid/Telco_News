@@ -29,11 +29,12 @@ def form():
         end_date = request.form.get('end_date')
         
         filtered_df = filter_data.read_data(str(start_date), str(end_date), (keywords), (dropdown))
+        count1 = len(filtered_df)
         filtered_df = filtered_df.iloc[:50, :] 
         
         filtered_df.to_excel("filtered_news.xlsx", index=False)
       
-        return render_template('table.html', count = len(filtered_df), tables=[filtered_df.to_html(classes='data')], titles=filtered_df.columns.values)
+        return render_template('table.html', count = count1, tables=[filtered_df.to_html(classes='data')], titles=filtered_df.columns.values)
         
         
         
