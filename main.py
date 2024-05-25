@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, send_file
 from datetime import datetime
 import filter_data
+import pandas as pd
 
 
 
@@ -29,6 +30,10 @@ def form():
         end_date = request.form.get('end_date')
         
         filtered_df = filter_data.read_data(str(start_date), str(end_date), (keywords), (dropdown))
+        filtered_dev_df = filter_data.read_data_dev_telecom(str(start_date), str(end_date), (keywords), (dropdown))
+        filtered_df = pd.concat([filtered_df, filtered_dev_df], ignore_index = True)
+        filtered_df=filtered_df.sort_values(by=['date'], ascending=False)
+
         count1 = len(filtered_df)
         filtered_df = filtered_df.iloc[:50, :] 
         
@@ -52,6 +57,13 @@ def update_news():
     if request.method == 'GET':
         import update_TP
         count = update_TP.news_added
+    return render_template('update_success.html', count=str(count))
+
+@app.route('/updatedevtnews', methods=['GET'])
+def update_dev_news():
+    if request.method == 'GET':
+        import update_dev_telcom
+        count = update_dev_telcom.count
     return render_template('update_success.html', count=str(count))
 
 @app.route('/download', methods=['GET'])
